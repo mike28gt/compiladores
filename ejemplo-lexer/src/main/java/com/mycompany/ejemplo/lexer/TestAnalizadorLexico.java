@@ -5,9 +5,13 @@
  */
 package com.mycompany.ejemplo.lexer;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
-import jlex.test.Yylex;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jlex.test.AnalizadorLexico;
 
 /**
  *
@@ -17,9 +21,15 @@ public class TestAnalizadorLexico {
     
     public static void main(String[] args) {
         
-        Reader reader = new FileReader("");
-        Yylex lex = new Yylex(reader);
-        lex.yylex();
+        try {
+            Reader reader = new FileReader("/Users/miguelcatalan/NetBeansProjects/compiladores/ejemplo-lexer/src/main/jflex/test.java");
+            AnalizadorLexico lex = new AnalizadorLexico(reader);
+            lex.yylex();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TestAnalizadorLexico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TestAnalizadorLexico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

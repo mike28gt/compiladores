@@ -1,1 +1,2 @@
-jlex/test/Yylex.class
+com/mycompany/ejemplo/lexer/TestAnalizadorLexico.class
+jlex/test/AnalizadorLexico.class
