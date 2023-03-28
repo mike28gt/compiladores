@@ -1,0 +1,5 @@
+class Prueba extends Examenes
+	void main
+		12 + 23
+		55 > 39
+		var1 && var2
