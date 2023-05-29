@@ -7,6 +7,7 @@ package com.mycompany.jflexycup;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,19 +19,15 @@ import umg.compiladores.*;
  */
 public class JFlexYCup {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
-            Reader r = new FileReader("/Users/miguelcatalan/Desktop/test_2.txt");
-            Lexer lex = new Lexer(r);
-            parser p = new parser(lex);
-            try {
-                p.parse();
-            } catch (Exception ex) {
-                Logger.getLogger(JFlexYCup.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Reader reader = new FileReader("/Users/miguelcatalan/Desktop/test.txt");
+            parser p = new parser(new Lexer(reader));
+            Object result = p.parse().value;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JFlexYCup.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(JFlexYCup.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }
