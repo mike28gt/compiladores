@@ -1,0 +1,30 @@
+package com.mycompany.jflexycup;
+
+import java_cup.runtime.*;
+
+terminal SUMA, MULTIPLICACION, PARENTESIS_IZQUIERDO, PARENTESIS_DERECHO, N;
+terminal Integer DIGITO;
+
+non terminal Integer l;
+non terminal Integer e;
+non terminal Integer t;
+non terminal Integer f;
+
+precedence left SUMA;
+precedence left MULTIPLICACION;
+
+start with l;
+
+l ::= e:e N {: System.out.println("Resultado: " + e); :}                                                                                                                                                                                                                                                                                                                                                                                                                       ;
+
+e ::= e:e1 SUMA t:t {: RESULT = e1.intValue() + t.intValue(); :};
+
+e ::= t:t {: RESULT = t.intValue(); :};
+
+t ::= t:t1 MULTIPLICACION f:f {: RESULT = t1.intValue() * f.intValue(); :};
+
+t ::= f:f {: RESULT = f.intValue(); :};
+
+f ::= PARENTESIS_IZQUIERDO e:e PARENTESIS_DERECHO {: RESULT = e.intValue(); :};
+
+f ::= DIGITO:d {: RESULT = d.intValue(); :};

@@ -1,4 +1,4 @@
-package umg.compiladores;
+package com.mycompany.jflexycup;
 
 import java_cup.runtime.*;
 
@@ -23,18 +23,17 @@ espacios_blanco = [ \t\r\n]
 
 %%
 
+"n"                 { System.out.println("Se reconoce lexema: " + yytext()); 
+                      return symbol(sym.N, yytext()); }
 "+"                 { System.out.println("Se reconoce lexema: " + yytext()); 
                       return symbol(sym.SUMA, yytext()); }
-"-"                 { System.out.println("Se reconoce lexema: " + yytext()); 
-                      return symbol(sym.RESTA, yytext()); }
 "*"                 { System.out.println("Se reconoce lexema: " + yytext()); 
                       return symbol(sym.MULTIPLICACION, yytext()); }
 "("                 { System.out.println("Se reconoce lexema: " + yytext()); 
-                      return symbol(sym.PARENTESIS_ABRE, yytext()); }
+                      return symbol(sym.PARENTESIS_IZQUIERDO, yytext()); }
 ")"                 { System.out.println("Se reconoce lexema: " + yytext()); 
-                      return symbol(sym.PARENTESIS_CIERRA, yytext()); }
-";"                 { System.out.println("Se reconoce lexema: " + yytext()); 
-                      return symbol(sym.PUNTO_Y_COMA, yytext()); }
+                      return symbol(sym.PARENTESIS_DERECHO, yytext()); }
 {numero}            { System.out.println("Se reconoce lexema: " + yytext()); 
-                      return symbol(sym.NUMERO, yytext()); }
+                      return symbol(sym.DIGITO, new Integer(yytext())); }
 {espacios_blanco}   { System.out.println("Se reconoce lexema: " + yytext()); }
+.                   { System.err.println("Caracter desconocido: " + yytext()); }
