@@ -21,3 +21,7 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/JFlexYCup/target/
+/2024-DefinicionDirigidaPorLaSintaxis/target/
+/2024-DefinicionDirigidaPorLaSintaxis-AtributosSintetizados/target/
+/2024-DefinicionDirigidaPorLaSintaxis-AtributosHeredados/target/
