@@ -1,22 +1,42 @@
-package umg.compiladores;
+package com.mycompany.jflexycup;
 
 import java_cup.runtime.*;
 
-terminal PUNTO_Y_COMA, SUMA, RESTA, MULTIPLICACION, PARENTESIS_ABRE, PARENTESIS_CIERRA, NUMERO;
-non terminal expr_list, expr;
+parser code {:
+    public static int tmpHer;
 
-precedence left SUMA, RESTA;
-precedence left MULTIPLICACION;
+    public static void t_prima_accion(t_prima_attrs t_prima) {
+        tmpHer = t_prima.her;
+        t_prima.sin = tmpHer;
+    }
 
-start with expr_list;
+    class T_prima_attrs {
+        int her;
+        int sin;
+    }
+:};
 
-expr_list   ::= expr_list expr PUNTO_Y_COMA
-              | expr PUNTO_Y_COMA
-;
+terminal MULTIPLICACION;
+terminal Integer DIGITO;
 
-expr        ::= expr SUMA expr
-              | expr RESTA expr
-              | expr MULTIPLICACION expr
-              | PARENTESIS_ABRE expr PARENTESIS_CIERRA
-              | NUMERO
-;
+non terminal Integer t;
+non terminal Integer f;
+non terminal T_prima_attrs t_prima;
+
+start with t;
+
+t ::= f:f t_prima:t_prima {: t_prima.her = f.intValue();
+                             t_prima_accion(t_prima); 
+                             RESULT = t_prima.sin;
+                             System.out.println("Resultado: " + t_prima.sin); :};
+
+t_prima ::= MULTIPLICACION f:f t_prima:t_prima {: t_prima.her = parser.tmpHer * f.intValue(); 
+                                                  t_prima_accion(t_prima); // Ejecutamos la acción semántica para T'
+                                                  $$ = t_prime; 
+                                                :}
+t_prima ::= {: T_prima_attrs t_prima = new T_prima_attrs(); 
+               t_prima.sin = parser.tmpHer; 
+               $$ = t_prime; 
+            :};
+
+f ::= DIGITO:d {: $$ = d.intValue(); :};

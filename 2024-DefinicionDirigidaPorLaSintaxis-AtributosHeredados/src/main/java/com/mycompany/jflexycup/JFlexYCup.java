@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import umg.compiladores.*;
 
 /**
  *
@@ -20,7 +19,7 @@ public class JFlexYCup {
 
     public static void main(String[] args) {
         try {
-            Reader r = new FileReader("/Users/miguelcatalan/Desktop/test_2.txt");
+            Reader r = new FileReader("prueba.txt");
             Lexer lex = new Lexer(r);
             parser p = new parser(lex);
             try {
