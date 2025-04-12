@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package clase04.analizadorlexico;
+package tablasimbolos.scanner.apuntadores;
 
 /**
  *
@@ -16,6 +16,11 @@ public class Token {
         this.nombre = nombre;
     }
 
+    public Token(String nombre, String atributo) {
+        this.nombre = nombre;
+        this.atributo = atributo;
+    }
+    
     public String getAtributo() {
         return atributo;
     }
