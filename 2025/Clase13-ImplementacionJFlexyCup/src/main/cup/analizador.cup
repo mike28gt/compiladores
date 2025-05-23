@@ -1,0 +1,22 @@
+package com.example.clase13.implementacionjflexycup;
+
+import java_cup.runtime.*;
+
+terminal NUMERO;
+terminal SUMA, RESTA, MULTIPLICACION, DIVISION;
+
+non terminal expr_list, expr;
+
+precedence left SUMA, RESTA;
+precedence left MULTIPLICACION, DIVISION;
+
+start with expr_list;
+
+expr_list ::= expr_list expr
+             | expr;
+
+expr ::= expr SUMA expr
+       | expr RESTA expr
+       | expr MULTIPLICACION expr
+       | expr DIVISION expr
+       | NUMERO;
