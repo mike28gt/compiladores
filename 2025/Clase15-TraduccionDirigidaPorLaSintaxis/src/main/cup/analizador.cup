@@ -1,0 +1,44 @@
+package com.example.clase13.implementacionjflexycup;
+
+import java_cup.runtime.*;
+
+terminal Integer DIGITO;
+terminal N;
+terminal SUMA, MULTIPLICACION, PAR_ABRE, PAR_CIERRA;
+
+/* Los no terminales pueden tener un tipo */
+non terminal Integer L, E, T, F;
+
+precedence left SUMA;
+precedence left MULTIPLICACION;
+
+start with L;
+
+/* Cada símbolo en una producción es representado mediante un objeto de tipo Symbol. Las etiquetas
+   en los símbolos se refieren al nombre de la variable de instancia value en esos objetos. 
+   
+   El lado izquierdo de una producción siempre es representado mediante la etiqueta RESULT.
+*/
+L ::= E:e N                     {: System.out.println("El resultado es: " + e);  :}
+;
+
+E ::= E:e SUMA T:t              {: RESULT = e + t;  :}
+;
+
+E ::= T:t                       {: RESULT = t; :} 
+;
+
+T ::= T:t MULTIPLICACION F:f    {: RESULT = t * f; :}
+;
+
+T ::= F:f                       {: RESULT = f;  :}
+;
+
+F ::= PAR_ABRE E:e PAR_CIERRA   {: RESULT = e; :}
+;
+
+F ::= DIGITO:d                  {: RESULT = d; :}
+;
+
+F ::= error:e                   {: parser.report_error("Error de sintaxis, se omite el resto de la cadena", e); :} 
+;
